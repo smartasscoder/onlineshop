@@ -40,10 +40,12 @@
                 {
                     <tr>
                         <td>
-                            <img class="esh-thumbnail" src="@($"/Pics/{catalogItem.PictureFileName}")">
+                            <a href="@($"/product/{catalogItem.Id}")">
+                                <img class="esh-thumbnail" src="@($"/Pics/{catalogItem.PictureFileName}")">
+                            </a>
                         </td>
                         <td>
-                            <p>@catalogItem.Name</p>
+                            <a href="@($"/product/{catalogItem.Id}")">@catalogItem.Name</a>
                         </td>
                         <td>
                             <p>@catalogItem.Description</p>
