@@ -12,6 +12,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
+builder.Services.AddScoped<CartService>();
 if (builder.Configuration.GetValue<bool>("UseMockData"))
 {
     builder.Services.AddSingleton<ICatalogService, CatalogServiceMock>();

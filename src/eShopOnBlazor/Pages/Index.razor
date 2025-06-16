@@ -1,5 +1,6 @@
 ﻿@page "/"
 @inject ICatalogService CatalogService
+@inject CartService CartService
 
 <div class="esh-table">
     <p class="esh-link-wrapper">
@@ -31,6 +32,7 @@
                     <th>Stock</th>
                     <th>Restock</th>
                     <th>Max stock</th>
+                    <th>Add</th>
                 </tr>
             </thead>
             <tbody>
@@ -66,6 +68,9 @@
                         </td>
                         <td>
                             <p>@catalogItem.MaxStockThreshold</p>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-primary" @onclick="() => AddToCart(catalogItem)">Add to Cart</button>
                         </td>
                         <td>
                             <a href="@($"/Catalog/Edit/{catalogItem.Id}")" class="esh-table-link">
@@ -127,6 +132,11 @@
     {
         pageIndex--;
         LoadPage();
+    }
+
+    void AddToCart(CatalogItem item)
+    {
+        CartService.AddItem(item);
     }
 
     void Next()
