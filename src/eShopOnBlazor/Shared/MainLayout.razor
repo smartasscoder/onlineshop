@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@implements IDisposable
 @inject CartService CartService
 
 <header class="navbar navbar-light navbar-static-top">
@@ -40,9 +41,17 @@
 @code {
     DateTime SessionStartTime;
 
-    protected override void OnInitialized() 
+    protected override void OnInitialized()
     {
         SessionStartTime = DateTime.Now;
+        CartService.CartChanged += OnCartChanged;
+    }
+
+    void OnCartChanged() => InvokeAsync(StateHasChanged);
+
+    public void Dispose()
+    {
+        CartService.CartChanged -= OnCartChanged;
     }
 }
 

@@ -7,6 +7,8 @@ public class CartService
 {
     private readonly List<CartItem> _items = new();
 
+    public event Action? CartChanged;
+
     public IReadOnlyList<CartItem> Items => _items;
 
     public int TotalItems => _items.Sum(i => i.Quantity);
@@ -23,6 +25,7 @@ public class CartService
         {
             _items.Add(new CartItem { Item = item, Quantity = 1 });
         }
+        NotifyStateChanged();
     }
 
     public void RemoveItem(int itemId)
@@ -35,8 +38,15 @@ public class CartService
             {
                 _items.Remove(existing);
             }
+            NotifyStateChanged();
         }
     }
 
-    public void Clear() => _items.Clear();
+    public void Clear()
+    {
+        _items.Clear();
+        NotifyStateChanged();
+    }
+
+    private void NotifyStateChanged() => CartChanged?.Invoke();
 }
