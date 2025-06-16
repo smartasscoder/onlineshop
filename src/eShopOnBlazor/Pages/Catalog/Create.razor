@@ -2,6 +2,8 @@
 @inject ICatalogService CatalogService
 @inject NavigationManager NavigationManager
 @inject ILogger<Create> Logger
+@inject IWebHostEnvironment Environment
+@using System.IO
 
 <h2 class="esh-body-title">Create</h2>
 
@@ -61,8 +63,12 @@
 
         <div class="form-group">
             <label class="control-label col-md-2 form-control-style">Picture name</label>
-            <div class="col-md-4 esh-form-information form-control-style">
-                Uploading images not allowed for this version.
+            <div class="col-md-4 form-control-style">
+                <InputFile OnChange="OnImageSelected" />
+                @if (!string.IsNullOrEmpty(_item.PictureFileName))
+                {
+                    <p class="esh-form-information">@_item.PictureFileName</p>
+                }
             </div>
         </div>
 
@@ -126,5 +132,24 @@
         CatalogService.CreateCatalogItem(_item);
 
         NavigationManager.NavigateTo("/");
+    }
+
+    private async Task OnImageSelected(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        if (file == null)
+        {
+            return;
+        }
+
+        var extension = Path.GetExtension(file.Name);
+        var fileName = $"{Guid.NewGuid()}{extension}";
+        var path = Path.Combine(Environment.WebRootPath, "Pics", fileName);
+
+        await using var stream = file.OpenReadStream(long.MaxValue);
+        await using var fileStream = new FileStream(path, FileMode.Create);
+        await stream.CopyToAsync(fileStream);
+
+        _item.PictureFileName = fileName;
     }
 }
