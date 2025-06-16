@@ -13,6 +13,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddRazorComponents().AddInteractiveServerComponents();
 
 builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<OrderService>();
 if (builder.Configuration.GetValue<bool>("UseMockData"))
 {
     builder.Services.AddSingleton<ICatalogService, CatalogServiceMock>();

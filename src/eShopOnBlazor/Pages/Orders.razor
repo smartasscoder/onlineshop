@@ -1,0 +1,32 @@
+@using System.Linq
+@page "/orders"
+@inject OrderService OrderService
+
+<h2 class="esh-body-title">Order History</h2>
+
+@if (!OrderService.Orders.Any())
+{
+    <p>No orders have been placed.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order #</th>
+                <th>Date</th>
+                <th>Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in OrderService.Orders)
+            {
+                <tr>
+                    <td>@order.Id</td>
+                    <td>@order.Created.ToString("g")</td>
+                    <td>@order.TotalPrice.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

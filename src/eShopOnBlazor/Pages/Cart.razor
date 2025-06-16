@@ -1,6 +1,7 @@
 @using System.Linq
 @page "/cart"
 @inject CartService CartService
+@inject OrderService OrderService
 @inject IJSRuntime JS
 
 <h2 class="esh-body-title">Shopping Cart</h2>
@@ -40,6 +41,7 @@ else
 @code {
     async Task Checkout()
     {
+        OrderService.AddOrder(CartService.Items);
         await JS.InvokeVoidAsync("alert", "Order placed");
         CartService.Clear();
     }
