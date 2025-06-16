@@ -1,6 +1,7 @@
 ﻿@page "/Catalog/Details/{id:int}"
 @inject ICatalogService CatalogService
 @inject ILogger<Details> Logger
+@inject CartService CartService
 
 <h2 class="esh-body-title">Details</h2>
 
@@ -86,6 +87,7 @@
         </div>
 
         <div class="text-right esh-button-actions">
+            <button class="btn esh-button esh-button-primary" @onclick="() => AddToCart(_item)">Add to Cart</button>
 
             <a href="@($"/Catalog/Edit/{_item.Id}")" class="btn esh-button esh-button-primary">
                 Edit
@@ -119,4 +121,9 @@
 
         _item = CatalogService.FindCatalogItem(Id);
     }
+    void AddToCart(CatalogItem item)
+    {
+        CartService.AddItem(item);
+    }
+
 }
