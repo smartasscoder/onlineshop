@@ -11,6 +11,8 @@ public class CartService
 
     public int TotalItems => _items.Sum(i => i.Quantity);
 
+    public decimal TotalPrice => _items.Sum(i => i.Item.Price * i.Quantity);
+
     public void AddItem(CatalogItem item)
     {
         var existing = _items.FirstOrDefault(i => i.Item.Id == item.Id);
