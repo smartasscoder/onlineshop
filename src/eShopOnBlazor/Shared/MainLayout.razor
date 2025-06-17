@@ -1,14 +1,14 @@
 ﻿@inherits LayoutComponentBase
 @inject CartService CartService
 
-<header class="navbar esh-nav">
-    <div class="container d-flex align-items-center">
-        <a class="navbar-brand" href="">
-            <img src="/images/brand.png" class="esh-header-brand" />
+<header class="navbar navbar-light navbar-static-top">
+    <div class="esh-header-brand">
+        <a href="">
+            <img src="/images/brand.png" />
         </a>
-        <div class="ml-auto">
-            <a class="nav-link text-white" href="cart">Cart (@CartService.TotalItems)</a>
-        </div>
+    </div>
+    <div class="ml-auto p-2">
+        <a href="cart">Cart (@CartService.TotalItems)</a>
     </div>
 </header>
 
