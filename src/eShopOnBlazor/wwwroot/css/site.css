@@ -1,9 +1,40 @@
+.esh-nav {
+    background-color: #343a40;
+    padding: .5rem 1rem;
+    border-bottom: 2px solid var(--esh-primary-color);
+}
+
+.esh-nav .nav-link {
+    color: #ffffff;
+}
+
+.esh-nav .nav-link:hover {
+    color: #83D01B;
+}
+
+:root {
+    --esh-primary-color: #83D01B;
+    --esh-secondary-color: #E52638;
+    --esh-background: #f8f9fa;
+}
+
 /* Slider */
 .esh-app-hero {
     background-image: url("../images/main_banner.png");
     background-size: cover;
     height: 12.5vw;
     width: 100%;
+    position: relative;
+}
+
+.esh-app-hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Header */
@@ -22,11 +53,13 @@
     max-width: 1440px;
     margin-left: auto;
     margin-right: auto;
+    height: 40px;
 }
 
 .esh-header-title {
     font-family: Montserrat, sans-serif;
     position: relative;
+    z-index: 1;
     font-size: 4vw;
     font-weight: 600;
     color: #FFFFFF;
@@ -55,6 +88,10 @@
 }
 
 /* Body */
+body {
+    background-color: var(--esh-background);
+}
+
 .esh-body-title {
     font-family: Montserrat, sans-serif;
     padding-left: 3rem;
@@ -100,6 +137,14 @@
 .esh-table td {
     font-size: 1rem;
     font-weight: 300;
+}
+
+.esh-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.esh-table tbody tr:hover {
+    background-color: #e0f7d9;
 }
 
 .esh-table-price {
@@ -165,8 +210,9 @@
 
 .esh-button {
     border: 0;
-    border-radius: 0;
+    border-radius: .25rem;
     color: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     display: inline-block;
     font-size: 1rem;
     font-weight: 400;
@@ -178,21 +224,21 @@
 }
 
 .esh-button-primary {
-    background-color: #83D01B;
+    background-color: var(--esh-primary-color);
 }
 
     .esh-button-primary:hover {
         background-color: #4A760f;
-        color: white;
+        color: #ffffff;
     }
 
 .esh-button-secondary {
-    background-color: #E52638;
+    background-color: var(--esh-secondary-color);
 }
 
     .esh-button-secondary:hover {
         background-color: #b20000;
-        color: white;
+        color: #ffffff;
     }
 
 .esh-button-primary:hover {
